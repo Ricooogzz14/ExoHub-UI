@@ -1,25 +1,25 @@
-local EternalUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ricooogzz14/Eternal-UI/refs/heads/main/script.lua"))()
+local ExoHubUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USERNAME/ExoHub-UI/refs/heads/main/script.lua"))()
 
-local Window = EternalUI:CreateWindow({
-    Title = "Eternal Hub",
+local Window = ExoHubUI.CreateWindow({
+    Title = "ExoHub UI",
     Size = UDim2.new(0, 650, 0, 500)
 })
 
-local MainTab = Window:CreateTab("Main")
-local VisualsTab = Window:CreateTab("Visuals")
-local SettingsTab = Window:CreateTab("Settings")
+local MainTab = Window.CreateTab({Name = "Main"})
+local VisualsTab = Window.CreateTab({Name = "Visuals"})
+local SettingsTab = Window.CreateTab({Name = "Settings"})
 
-local GeneralSection = MainTab:CreateSection("General")
+local GeneralSection = MainTab.CreateSection({Name = "General"})
 
 GeneralSection:AddButton({
     Name = "Print Hello",
-    Tooltip = "Click to print message",
     Callback = function()
         print("Hello World!")
-        Window:Notify({
+        ExoHubUI.Notify({
             Title = "Success",
-            Message = "Button clicked!",
-            Duration = 3
+            Content = "Button clicked!",
+            Duration = 3,
+            Type = "Success"
         })
     end
 })
@@ -27,8 +27,6 @@ GeneralSection:AddButton({
 local AutoFarmToggle = GeneralSection:AddToggle({
     Name = "Auto Farm",
     Default = false,
-    Flag = "AutoFarm",
-    Tooltip = "Automatically farms resources",
     Callback = function(value)
         print("Auto Farm:", value)
     end
@@ -39,8 +37,6 @@ GeneralSection:AddSlider({
     Min = 16,
     Max = 100,
     Default = 16,
-    Flag = "WalkSpeed",
-    Tooltip = "Adjust movement speed",
     Callback = function(value)
         if game.Players.LocalPlayer.Character then
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
@@ -52,28 +48,14 @@ GeneralSection:AddDropdown({
     Name = "Select Mode",
     Options = {"Normal", "Hard", "Extreme"},
     Default = "Normal",
-    Flag = "GameMode",
-    Tooltip = "Select game difficulty",
     Callback = function(option)
         print("Mode:", option)
-    end
-})
-
-GeneralSection:AddKeybind({
-    Name = "Kill Aura Key",
-    Default = Enum.KeyCode.X,
-    Flag = "KillAuraKey",
-    Tooltip = "Press to activate kill aura",
-    Callback = function()
-        print("Kill Aura activated!")
     end
 })
 
 GeneralSection:AddTextbox({
     Name = "Player Name",
     Placeholder = "Enter target...",
-    Flag = "TargetName",
-    Tooltip = "Enter player to target",
     Callback = function(text, enterPressed)
         if enterPressed then
             print("Target:", text)
@@ -81,45 +63,42 @@ GeneralSection:AddTextbox({
     end
 })
 
-GeneralSection:AddColorPicker({
-    Name = "ESP Color",
-    Default = Color3.fromRGB(147, 112, 219),
-    Flag = "ESPColor",
-    Tooltip = "Choose ESP highlight color",
-    Callback = function(color)
-        print("Color:", color)
-    end
+GeneralSection:AddLabel({
+    Text = "Status: Ready",
+    Color = Color3.fromRGB(255, 153, 0),
+    Bold = true
 })
 
-local ConfigSection = SettingsTab:CreateSection("Configuration")
+local ConfigSection = SettingsTab.CreateSection({Name = "Configuration"})
 
 ConfigSection:AddButton({
-    Name = "Save Config",
+    Name = "Save Settings",
     Callback = function()
-        Window:SaveConfig("Default")
-        Window:Notify({
+        ExoHubUI.Notify({
             Title = "Saved",
-            Message = "Configuration saved successfully!",
-            Duration = 3
+            Content = "Settings saved successfully!",
+            Duration = 3,
+            Type = "Success"
         })
     end
 })
 
 ConfigSection:AddButton({
-    Name = "Load Config",
+    Name = "Reset All",
     Callback = function()
-        Window:LoadConfig("Default")
-        Window:Notify({
-            Title = "Loaded",
-            Message = "Configuration restored!",
-            Duration = 3
+        ExoHubUI.Notify({
+            Title = "Reset",
+            Content = "All settings reset to default!",
+            Duration = 3,
+            Type = "Warning"
         })
     end
 })
 
-Window:Notify({
-    Title = "EternalUI Loaded",
-    Message = "Welcome! Press RightControl to toggle UI",
-    Duration = 5
+-- Welcome notification
+ExoHubUI.Notify({
+    Title = "ExoHub UI Loaded",
+    Content = "Welcome! Press RightControl to toggle UI",
+    Duration = 5,
+    Type = "Info"
 })
---]]
