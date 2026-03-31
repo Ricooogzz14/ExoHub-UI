@@ -1,4 +1,4 @@
-local ExoHubUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USERNAME/ExoHub-UI/refs/heads/main/script.lua"))()
+local ExoHubUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ricooogzz14/ExoHub-UI/refs/heads/main/script.lua"))()
 
 local Window = ExoHubUI.CreateWindow({
     Title = "ExoHub UI",
